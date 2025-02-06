@@ -1,29 +1,41 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { useState } from 'react';
+import BookCreate from './components/BookCreate';
+import BookList from './components/BookList';
 
 function App() {
+    const [books, setBooks] = useState([]);
+
+    const editBookById = (id, newTitle) => {
+        const updatedBooks = books.map((book) => {
+            if (book.id === id) {
+                return { ...book, title: newTitle };
+            }
+            return book;
+        });
+        setBooks(updatedBooks);
+    };
+
+    const deleteBookById = (id) => {
+        const updatedBooks = books.filter((book) =>{
+            return book.id !== id;
+        });
+        setBooks(updatedBooks);
+    };
+
+    const CreateBook = (title) => {
+        const updatedBooks = [
+            ...books, 
+            { id: Math.round(Math.random() * 99999), title }
+        ];
+        setBooks(updatedBooks);
+    };
+
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>React Starter Project</h1>
-      <div className="card">
-        <p>
-          Edit <code>src/App.js</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='app'>
+        <h1>Reading list</h1>
+      <BookList onEdit={editBookById} books={books} onDelete={deleteBookById} />
+      <BookCreate onCreate={CreateBook} />  
+    </div>
   );
 }
 

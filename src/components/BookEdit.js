@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import useBooksContext from '../hooks/use-books-context';
 
+// Add the BookEdit component
 function BookEdit({ book, onSubmit }) {
     const [title, setTitle] = useState(book.title);
     const { editBookById } = useBooksContext();
@@ -16,6 +17,7 @@ function BookEdit({ book, onSubmit }) {
         editBookById(book.id, title);
     };
 
+    // Add the JSX for the BookEdit component
     return (
         <form onSubmit={handleSubmit} className="book-edit">
             <label>Title</label>

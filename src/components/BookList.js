@@ -1,6 +1,7 @@
 import BookShow from "./BookShow";
 import useBooksContext from "../hooks/use-books-context";
 
+// Add the BookList component
 function BookList() {
     const { books } = useBooksContext();
 

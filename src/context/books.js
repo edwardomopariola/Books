@@ -1,9 +1,10 @@
 import { createContext, useState } from 'react';
 import axios from 'axios';
 
-
+// BooksContext is a context object that we can use to share the state and functions with the rest of the application.
 const BooksContext = createContext();
 
+// Provider is a component that wraps the children components and passes the state and functions to the BooksContext.Provider.
 function Provider({ children }) {
     // books is a state variable that holds all the books.
     const [books, setBooks] = useState([]);
